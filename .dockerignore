@@ -1,0 +1,6 @@
+node_modules
+dist
+tmp/*
+git
+routes.http
+example.mp3

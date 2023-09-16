@@ -1,11 +1,11 @@
 # @name get-prompts
-GET http://localhost:3333/prompts
+GET http://localhost:8080/prompts
 
 
 ###
 
 # @name upload-videos
-POST http://localhost:3333/videos
+POST http://localhost:8080/videos
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
@@ -17,8 +17,19 @@ Content-Type: audio/mpeg
 
 ### 
 
+# @name upload-youtube
+
+POST http://localhost:8080/youtube
+Content-Type: application/json
+
+{
+  "url": "http://youtube.com/shorts/lB8da8YHQno?si=o1TpQkb2iyCGn_Dv"
+}
+
+### 
+
 # @name create-video-transcription
-POST http://localhost:3333/videos/d2bc8741-a493-48a4-8757-603ea84b4cd5/transcription
+POST http://localhost:8080/videos/d2bc8741-a493-48a4-8757-603ea84b4cd5/transcription
 Content-Type: application/json
 
 {
@@ -28,7 +39,7 @@ Content-Type: application/json
 ###
 
 # @name generate-ai-video-completion
-POST http://localhost:3333/ai/complete
+POST http://localhost:8080/ai/complete
 Content-Type: application/json
 
 {

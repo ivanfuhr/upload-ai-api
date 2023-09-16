@@ -1,6 +1,7 @@
 import { OpenAIStream, streamToResponse } from 'ai';
 import { FastifyInstance } from "fastify";
 import { z } from 'zod';
+import { env } from '../lib/env';
 import { openai } from "../lib/openai";
 import { prisma } from "../lib/prisma";
 
@@ -42,7 +43,7 @@ export async function generateAiCompletionRoute(app: FastifyInstance) {
     const stream = OpenAIStream(response)
     streamToResponse(stream, reply.raw, {
       headers: {
-        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Origin': env.CORS_ORIGIN,
         'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, DELETE, PUT, PATCH',
       }
     })

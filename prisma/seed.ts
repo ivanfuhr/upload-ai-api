@@ -55,6 +55,24 @@ Transcrição:
 '''`.trim()
     }
   })
+
+  await prisma.prompt.create({
+    data: {
+      title: 'Resumo de Estudo',
+      template: `Seu papel é gerar um resumo de estudo para um vídeo do YouTube.
+
+Abaixo você receberá uma transcrição desse vídeo, use essa transcrição para gerar o resumo.
+
+Você pode incluir todos os detalhes necessários para o seu resumo de estudo. Não há limite de caracteres ou palavras, então sinta-se à vontade para incluir todas as informações relevantes.
+
+
+Transcrição:
+'''
+{transcription}
+'''
+`.trim()
+    }
+  })
 }
 
 main()

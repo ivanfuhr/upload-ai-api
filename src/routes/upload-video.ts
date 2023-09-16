@@ -15,6 +15,7 @@ export async function uploadVideoRoute(app: FastifyInstance) {
       fileSize: 1_048_576 * 25 // 25mb      
     }
   });
+  
   app.post("/videos", async (request, reply) => {
     const data = await request.file()
 
@@ -32,9 +33,7 @@ export async function uploadVideoRoute(app: FastifyInstance) {
       })
     }
 
-    const fileBaseName = path.basename(data.filename, extension)
-    const fileUploadName = `${fileBaseName}-${randomUUID()}${extension}`
-    const uploadDestination = path.resolve(__dirname, '../../tmp', fileUploadName)
+    const uploadDestination = path.resolve(__dirname, '../../tmp', `audio-${randomUUID()}${extension}`)
 
     await pump(data.file, createWriteStream(uploadDestination))
 
@@ -45,6 +44,10 @@ export async function uploadVideoRoute(app: FastifyInstance) {
       }
     })
 
-    return { video }
+    return {
+      video: {
+        id: video.id,
+      }
+    }
   })
 }
